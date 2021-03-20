@@ -1,7 +1,7 @@
-library(tidyverse)
 library(geosphere)
 library(lubridate)
 library(rebird)
+library(tidyverse)
 
 my_lat <- 42.3601
 my_lng <- -71.0589
@@ -19,9 +19,9 @@ get_hotspot <- function(hs){
 
 target_hotspots <- (hotspots
   %>% mutate(dist=distHaversine(c(my_lng, my_lat), cbind(lng, lat)) / 1000)
-  %>% filter(dist < 100)
+  %>% dplyr::filter(dist < 100)
   %>% group_by(reg3)
-  %>% filter(rank(desc(species)) < 40))
+  %>% dplyr::filter(rank(desc(species)) < 40))
 
 sightings <- (target_hotspots
   %>% `$`(locId)

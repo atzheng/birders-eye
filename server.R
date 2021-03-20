@@ -1,3 +1,5 @@
+filter <- dplyr::filter
+
 server <- function(input, output){
   sightings <- reactive({
     valid_hss <- filter(all_hotspots, dist < input $ radius) %>% `$`(locId)
